@@ -20,12 +20,13 @@
 		 -->
 
 
-        单向数据绑定：<input type="text" v-bind:value="name">
+        单向数据绑定：<input type="text" :value="name">
         <br/>
-        双向数据绑定：<input type="text" v-model:value="name">
+        v-model简写 v-model
+        双向数据绑定：<input type="text" v-model="name">
         <br/>
         如下代码是错误的：因为v-model在h2中不适用
-        <h2 v-model:x="name">你好啊</h2>
+        <h2 :x="name">你好啊</h2>
     </div>
     <script>
         new Vue({
