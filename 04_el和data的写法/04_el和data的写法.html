@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_el和data的写法</title>
+    <script src="../libs/vue.js" type="text/javascript"></script>
+</head>
+<body>
+		<!-- 
+			data与el的2种写法
+					1.el有2种写法
+									(1).new Vue时候配置el属性。
+									(2).先创建Vue实例，随后再通过vm.$mount('#root')指定el的值。
+					2.data有2种写法
+									(1).对象式
+									(2).函数式
+									如何选择：目前哪种写法都可以，以后学习到组件时，data必须使用函数式，否则会报错。
+					3.一个重要的原则：
+									由Vue管理的函数，一定不要写箭头函数，一旦写了箭头函数，this就不再是Vue实例了。
+		-->
+
+
+    <div id="root">
+        你好，{{name}}
+    </div>
+    <script>
+        /**  el的两种写法   */
+
+
+        // const v = new Vue({
+        //     //el:"#root", // 第一种写法
+        //     data:{
+        //         name:"学习Vue的第二天"
+        //     }
+        // })
+        // setTimeout(() => {
+        //     v.$mount("#root") // 第二种写法
+        // }, 1000);
+
+        /**  data的两种写法   */   
+        let data = {
+            name:"学习Vue的第二天"
+        }
+        const v = new Vue({
+            el:"#root",
+            data:function() {
+                // Vue来调用这个函数
+                // 所以这个函数的this是Vue
+                // 千万不要写成箭头函数，因为箭头函数的this是声明这个函数的对象，即Window
+                console.log(this)
+                return {
+                    name:"学习Vue的第二天"
+                }
+            }
+            // 第一种写法：对象式
+            // 第二种写法：函数式 => 组件化开发必须使用函数式写法
+            /**
+             * 一般为了方便，这样子写
+             * data(){
+             *  return{
+             *      key:value 
+             *      }
+             * }
+            */
+        })
+
+    </script>
+</body>
+</html>
