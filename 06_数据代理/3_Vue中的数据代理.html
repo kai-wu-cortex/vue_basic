@@ -4,29 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>05_MVVM</title>
+    <title>3_Vue中的数据代理</title>
     <script src="../libs/vue.js" type="text/javascript"></script>
 </head>
 <body>
-
-    	<!-- 
-			MVVM模型
-						1. M：模型(Model) ：data中的数据
-						2. V：视图(View) ：模板代码
-						3. VM：视图模型(ViewModel)：Vue实例
-			观察发现：
-						1.data中所有的属性，最后都出现在了vm身上。
-						2.vm身上所有的属性 及 Vue原型上所有属性，在Vue模板中都可以直接使用。
-		-->
-
     <!--View-->
     <div id="root">
         <h1>学校名称:{{name}}</h1>
         <h1>学校地址:{{address}}</h1>
-        <h1>测试一下:{{1+1}}</h1>
-        <h1>测试一下:{{$options}}</h1>
-        <h1>测试一下:{{$emit}}</h1>
-        <h1>测试一下:{{_c}}</h1>
+
         <!--vm实例里面的内容最终可以出现在模版语法中调用 => {{这里面的东西}}可以直接用vm.xx 来访问-->
     </div>
 <script>
@@ -39,6 +25,13 @@
                 address:"shenzhen"
             }
         })
+
+        /**
+         * vm.name => getter => data.name
+         * vm.name <=> setter <=> data.name
+        */
+
+       
 </script>
 </body>
 </html>
