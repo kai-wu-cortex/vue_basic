@@ -46,10 +46,10 @@
         <!-- 阻止事件冒泡 -->
         <!-- 点击div捕捉到click事件后继续捕捉button的div事件，因此要阻止div冒泡的话，加入.stop事件修饰符 -->
         <div class="demo1" @click="showInfo">
-            <button @click.stop="showInfo2"> 
+            <button @click.stop="showInfo2">  </button>
+            <!-- <a href="http://www.baidu.com" @click.stop.prevent="showInfo2">点我提示信息</a> -->修饰符可以连续写
                 <!-- 阻止该事件收到上一层级点击事件的影响 -->
-                点我提示信息
-            </button>
+           
         </div>
 
         <!-- 3.once：事件只触发一次（常用）； -->
