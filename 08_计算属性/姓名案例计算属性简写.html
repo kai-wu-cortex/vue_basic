@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例计算属性</title>
+    <script src="../libs/vue.js" type="text/javascript"></script>
+</head>
+<body>
+  
+   <div id="root">
+    姓：<input type="text" placeholder="请输入姓" v-model:value="firstName"><br>
+    名：<input type="text" placeholder="请输入名" v-model:value="secondName"><br>
+    全名：<span>{{fullName}}</span> 
+    全名：<span>{{fullName}}</span> 
+    全名：<span>{{fullName}}</span> 
+    全名：<span>{{fullName}}</span> 
+    <!-- 不太推荐使用复杂的模版表达式 -->
+   </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            firstName:"张",
+            secondName:"三"
+        },
+        // 计算属性
+        computed:{
+            
+            // fullName:{
+            //    // 确定了只读不改，才可以用简写模式
+            //    // 完整写法
+            //    get(){
+            //     console.log("@get调用了")
+            //     // vue将get()中的this指向自动调成了vm
+            //     return this.firstName+"-"+this.secondName
+            //    }
+
+            // }
+               // 简写
+               fullName(){
+                   // getter函数使用
+                console.log("@get调用了")
+                // vue将get()中的this指向自动调成了vm
+                return this.firstName+"-"+this.secondName                  
+               }
+
+               }
+        }
+       
+    )
+</script>
+</html>
