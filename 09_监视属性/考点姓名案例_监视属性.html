@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed与watch的区别</title>
+    <script src="../libs/vue.js" type="text/javascript"></script>
+</head>
+<body>
+  
+   <div id="root">
+    姓：<input type="text" placeholder="请输入姓" v-model:value="firstName"><br>
+    名：<input type="text" placeholder="请输入名" v-model:value="secondName"><br>
+    全名：<span>{{fullName}}</span> 
+	<!-- 
+				computed和watch之间的区别：
+						1.computed能完成的功能，watch都可以完成。
+						2.watch能完成的功能，computed不一定能完成，例如：watch可以进行异步操作。
+				两个重要的小原则：
+							1.所被Vue管理的函数，最好写成普通函数，这样this的指向才是vm 或 组件实例对象。
+							2.所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等、Promise的回调函数），最好写成箭头函数，
+								这样this的指向才是vm 或 组件实例对象。
+		-->
+    <!-- 不太推荐使用复杂的模版表达式 -->
+   </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            firstName:"张",
+            secondName:"三",
+            fullName:"张-三"
+            
+        },
+        // 计算属性
+        // computed:{
+        //   fullName(){
+        //     console.log("@get被调用了")
+        //     setTimeout(()=>{
+        //         return this.firstName+this.secondName
+        //     },1000)
+        //     // 计算属性完全靠的是return 的返回值
+        //     // 不能开启异步任务去维护数据的
+        //     // 但是watch可以，因为watch靠的不是返回值
+        //   }
+        // },
+        watch:{
+            firstName(n){
+                setTimeout(()=>{
+                    this.fullName = n+'-'+this.secondName
+                    // 定时器中的回调函数不是vue所管理的函数
+                    //***********箭头函数的this是该函数的拥有者（firstName），普通函数的this是该函数的调用者***********
+                },1000)
+            },
+            secondName(n){
+                this.fullName = this.firstName+'-'+n
+            }
+       }
+    })
+</script>
+</html>
